@@ -1,0 +1,274 @@
+%-*- Mode:LaTeX; -*-      
+\documentclass[11pt]{article}
+\usepackage{geometry}		% Force narrower margins
+\geometry{letterpaper}
+\geometry{lmargin=1.0in, tmargin=1.0in, rmargin=1.0in, bmargin=0.6in}
+\geometry{headsep=0in, footskip=0.4in}
+
+\setlength{\parskip}{.1in}  % removed space between paragraphs
+\setlength{\parindent}{0in}
+
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\newcommand{\ra}{$\rightarrow$~}
+\newcommand{\dt}{$\circ$~}
+\newcommand{\adj}{\texttt{/ADJ }}
+\newcommand{\adv}{\texttt{/ADV }}
+\newcommand{\art}{\texttt{/ART }}
+\newcommand{\conj}{\texttt{/CONJ }}
+\newcommand{\ger}{\texttt{/GER }}
+\newcommand{\infi}{\texttt{/INF }}
+\newcommand{\mod}{\texttt{/MOD }}
+\newcommand{\noun}{\texttt{/NOUN }}
+\newcommand{\particle}{\texttt{/PART }}
+\newcommand{\prep}{\texttt{/PREP }}
+\newcommand{\perpro}{\texttt{/PERPRO }}
+\newcommand{\relpro}{\texttt{/RELPRO }}
+\newcommand{\ver}{\texttt{/VERB }}
+\newcommand{\sub}{\texttt{/Subject }}
+\newcommand{\dobj}{\texttt{/Direct Object }}
+\newcommand{\iobj}{\texttt{/Indirect Object }}
+\newcommand{\act}{\texttt{ACTIVE voice}}
+\newcommand{\pas}{\texttt{PASSIVE voice}}
+
+\begin{document}
+
+\large
+\begin{center}
+{\bf CS-5340/6340, Written Assignment \#1} \\
+{\bf DUE: Tuesday, September 4, 2018 by 11:59pm}
+\end{center}
+\normalsize
+
+\begin{enumerate}  
+
+%% ===============================================================
+% QUESTION #1 : Parts of Speech    
+%% =============================================================
+
+\item (33 pts) 
+
+\begin{enumerate}
+
+\item John\noun might\mod go\ver to\prep school\noun to\infi learn\ver welding\ger.
+\vspace*{.2in}
+
+
+\item Fires\noun broke\ver out\particle near\prep Moab\noun without\prep warning\ger.
+\vspace*{.2in}
+
+
+\item Kate\noun, who\relpro is\ver brilliant\adj, builds\ver robots\noun. 
+\vspace*{.2in}
+
+
+\item Susan\noun loves\ver her\perpro house\noun but\conj may not\mod stay\ver there\adv.
+\vspace*{.2in}
+
+
+\item Sleeping\ger bags\noun can\mod keep\ver people\noun from\prep freezing\ger on\prep camping\ger trips\noun.
+\vspace*{.2in}
+
+
+\item To\infi quit\ver smoking\ger, Joe\noun never\adv buys\ver cigarettes\noun, which\relpro he\perpro craves\ver.
+\vspace*{.2in}
+
+
+\item  Tom\noun makes\ver up\particle stories\noun about\prep imaginary\adj monsters\noun.
+\vspace*{.2in}
+
+
+\item She\perpro delicately\adv brought up\particle a\art sensitive\adj topic\noun to\prep Bill\noun.
+\vspace*{.2in}
+
+
+\end{enumerate}
+
+
+\newpage
+%% ===============================================================
+% QUESTION #2: Active/Passive Voice
+%% ================================================================
+
+\item (20 pts) 
+
+\begin{enumerate}
+
+\item The bird quickly built an amazing nest for its young.\\
+\act
+\vspace*{.5in}
+
+\item George has been having serious problems with his back.\\
+\act
+\vspace*{.5in}
+
+\item Mary does not want help with her car.\\
+\act
+\vspace*{.5in}
+
+\item The window of the Toyota Prius was broken during a hail storm.\\
+\pas
+\vspace*{.5in}
+
+\item Too much money has been spent on unnecessary trips to Europe.\\
+\pas
+\vspace*{.5in}
+
+\item He could barely understand the writing on the chalkboard.\\
+\act
+\vspace*{.5in}
+
+\item Both girls from Utah were chosen for the summer program.\\
+\pas
+\vspace*{.5in}
+
+\item John was told about the election results by his neighbor.\\
+\pas
+\vspace*{.5in}
+
+\item Tina received several awards for her athletic skills.\\
+\act
+\vspace*{.5in}
+
+\item The boy had seen many bears near the family's cabin.\\
+\act
+\vspace*{.5in}
+
+\end{enumerate}
+
+
+
+\newpage
+%% ===============================================================
+% QUESTION #3: Syntactic Roles
+%% ================================================================
+
+\item (20 pts) 
+
+\begin{enumerate}
+
+\item \underline{His grandmother}\sub left \underline{her son}\iobj \underline{many valuable jewels}\dobj.
+\vspace*{.5in}
+
+\item \underline{The cat}\sub was chased by a barking dog.
+\vspace*{.5in}
+
+\item \underline{Tom Brady}\sub passed \underline{the football}\dobj to his wide receiver.
+\vspace*{.5in}
+
+\item Don't forget \underline{your car keys}\dobj again.
+\vspace*{.5in}
+
+\item \underline{George}\sub mailed \underline{his daughter}\iobj \underline{a letter}\dobj at her summer camp. 
+\vspace*{.5in}
+
+\item \underline{IBM}\sub awarded \underline{a bonus}\dobj to John for his inventions.
+\vspace*{.5in}
+
+\item \underline{You}\sub should pick \underline{your favorite movie}\dobj!
+\vspace*{.5in}
+
+\item \underline{The old man}\sub promised \underline{the boy}\iobj \underline{a lawn mowing job}\dobj in summer.
+\vspace*{.5in}
+
+\item \underline{Susan}\sub was extremely happy about \underline{the news}\dobj.
+\vspace*{.5in}
+
+\item \underline{The woman with very long hair}\sub was blocking \underline{the view}\dobj in the movie theater.
+\vspace*{.5in}
+
+
+\end{enumerate}
+
+
+\newpage
+%% ===============================================================
+% QUESTION #4: Parse Trees
+%% ================================================================
+
+\item (12 pts) List all of the context-free grammar rules that are depicted in the parse trees above.  You only need to list grammar rules for the non-terminal symbols S, NP, VP, and PP. You do \underline{not} need to list rules for the non-terminal symbols associated with part-of-speech tag assignments (i.e., noun, verb, etc.).
+
+\vspace*{.2in}
+$$S \rightarrow NP \  VP$$
+$$S \rightarrow NP \ S \  VP$$
+$$S \rightarrow VP \  PP$$
+\vspace*{.2in}
+$$NP \rightarrow noun$$
+$$NP \rightarrow art \ noun$$
+$$NP \rightarrow noun \ PP$$
+$$NP \rightarrow art \ noun \ PP$$
+$$NP \rightarrow perpro \ noun$$
+\vspace*{.2in}
+$$VP \rightarrow verb$$
+$$VP \rightarrow verb \ NP$$
+$$VP \rightarrow adv \ verb \ NP \ PP$$
+\vspace*{.2in}
+$$PP \rightarrow prep \ NP$$
+
+\newpage
+%% ================================================================
+% QUESTION #5: Subcategorization Frames
+%% ================================================================
+
+\item (15 pts)   
+
+\begin{enumerate}
+
+\item {\it drive}\\
+\textbf{NP} I am driving a truck.\\
+\textbf{PP} I drive to school everyday.
+
+\item {\it laugh}\\
+\textbf{None}
+
+\item {\it wear}\\
+\textbf{NP} She is wearing a red hat.
+
+\item {\it hope}\\
+\textbf{that S} I hope that she can pass the exam.
+
+\item {\it point}\\
+\textbf{NP} He pointed the way to the stadium.\\
+\textbf{PP} The arrow is pointing to the North.
+
+\end{enumerate}
+
+
+\newpage
+\underline{\textbf{Question \#6 is for CS-6340 students ONLY!}}  \\
+
+\item (12 pts) 
+
+\begin{enumerate}
+
+\item G1 
+$$\texttt{art}?\texttt{adj}*\texttt{noun}+$$
+\vspace*{.2in}
+
+\item G2
+$$\texttt{art}?\texttt{adj}*\texttt{noun}+$$
+\vspace*{.2in}
+
+\item G3
+$$\texttt{art}?\texttt{adj}?\texttt{noun}+$$
+\vspace*{.2in}
+
+\item G4
+$$\texttt{art}?\texttt{adj}*\texttt{noun}+$$
+\vspace*{.2in}
+
+\end{enumerate}
+
+
+\end{enumerate}  % END OF WRITTEN QUESTIONS
+
+\newpage
+\hspace*{1.5in}  {\bf ELECTRONIC SUBMISSION INSTRUCTIONS} \\
+
+You should submit the answers to this assignment {\bf in pdf format}
+on our course's CANVAS site by 11:59pm on Tuesday, September 4.
+
+\end{document}
+
+
