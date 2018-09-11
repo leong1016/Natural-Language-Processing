@@ -1,0 +1,296 @@
+%-*- Mode:LaTeX; -*-      
+\documentclass[11pt]{article}
+\usepackage{vmargin}		% Force narrower margins
+\setpapersize{USletter}
+\setmarginsrb{1.0in}{1.0in}{1.0in}{0.6in}{0pt}{0pt}{0pt}{0.4in}
+\setlength{\parskip}{.1in}  % removed space between paragraphs
+\setlength{\parindent}{0in}
+
+\usepackage{epsfig}
+\usepackage{graphicx}
+\newcommand{\ra}{$\rightarrow$~}
+\newcommand{\dt}{$\circ$~}
+
+\begin{document}
+
+\large
+\begin{center}
+{\bf CS-5340/6340, Written Assignment \#1} \\
+{\bf DUE: Tuesday, September 4, 2018 by 11:59pm}
+\end{center}
+\normalsize
+
+\begin{enumerate}  
+
+%% ===============================================================
+% QUESTION #1 : Parts of Speech    
+%% =============================================================
+
+\item (33 pts) For each sentence below, label each word with its
+  correct part-of-speech (POS) tag based upon the word's use in the sentence.
+  Do not assign POS tags to punctuation marks. 
+
+  Choose from the following list of part-of-speech tags: {\bf
+    adjective ({\sc adj}), adverb ({\sc adv}), article ({\sc art}),
+    conjunction ({\sc conj}), gerund ({\sc ger}), infinitive ``to''
+    ({\sc inf}), modal verb ({\sc mod}), noun ({\sc noun}), particle
+    ({\sc part}), preposition ({\sc prep}), personal 
+    pronoun ({\sc perpro}), relative pronoun ({\sc relpro}), verb
+    ({\sc verb})} [not modal]. 
+
+For infinitive verb phrase constructions, label ``to'' as {\sc inf}
+and the verb itself as {\sc verb}. 
+
+NOTE: An easy way to show your part-of-speech tags is to append a
+slash and POS tag after each word. For example: ``Natural/{\sc adj}
+language/{\sc noun} is/{\sc verb} fun/{\sc adj}.'' \\
+
+
+\begin{enumerate}
+
+\item John might go to school to learn welding.
+\vspace*{.2in}
+
+
+\item Fires broke out near Moab without warning
+\vspace*{.2in}
+
+
+\item Kate, who is brilliant, builds robots. 
+\vspace*{.2in}
+
+
+
+\item Susan loves her house but may not stay there.
+\vspace*{.2in}
+
+
+
+\item Sleeping bags can keep people from freezing on camping trips.
+\vspace*{.2in}
+
+
+\item To quit smoking, Joe never buys cigarettes, which he craves.
+\vspace*{.2in}
+
+
+\item  Tom makes up stories about imaginary monsters.
+\vspace*{.2in}
+
+
+
+\item She delicately brought up a sensitive topic to Bill.
+\vspace*{.2in}
+
+
+\end{enumerate}
+
+
+\newpage
+%% ===============================================================
+% QUESTION #2: Active/Passive Voice
+%% ================================================================
+
+\item (20 pts) For each sentence below, indicate whether the main verb
+  is in an {\it active voice} or {\it passive voice} construction. 
+
+\begin{enumerate}
+
+\item The bird quickly built an amazing nest for its young.
+\vspace*{.5in}
+
+\item George has been having serious problems with his back.
+\vspace*{.5in}
+
+\item Mary does not want help with her car.
+\vspace*{.5in}
+
+\item The window of the Toyota Prius was broken during a hail storm.
+\vspace*{.5in}
+
+\item Too much money has been spent on unnecessary trips to Europe.
+\vspace*{.5in}
+
+\item He could barely understand the writing on the chalkboard.
+\vspace*{.5in}
+
+\item Both girls from Utah were chosen for the summer program.
+\vspace*{.5in}
+
+\item John was told about the election results by his neighbor.
+\vspace*{.5in}
+
+\item Tina received several awards for her athletic skills.
+\vspace*{.5in}
+
+\item The boy had seen many bears near the family's cabin.
+\vspace*{.5in}
+
+\end{enumerate}
+
+
+
+\newpage
+%% ===============================================================
+% QUESTION #3: Syntactic Roles
+%% ================================================================
+
+\item (20 pts) For each sentence below, identify the noun phrases that
+  correspond to the syntactic roles of {\bf Subject}, {\bf Direct Object}, and
+  {\bf Indirect Object} with respect to the verb phrase. Each sentence will have at
+  least one of these syntactic roles, but not necessarily all of them!
+
+\begin{enumerate}
+
+\item His grandmother left her son many valuable jewels.
+\vspace*{.5in}
+
+\item The cat was chased by a barking dog.
+\vspace*{.5in}
+
+\item Tom Brady passed the football to his wide receiver.
+\vspace*{.5in}
+
+\item Don't forget your car keys again.
+\vspace*{.5in}
+
+\item George mailed his daughter a letter at her summer camp. 
+\vspace*{.5in}
+
+\item IBM awarded a bonus to John for his inventions.
+\vspace*{.5in}
+
+\item You should pick your favorite movie!
+\vspace*{.5in}
+
+\item The old man promised the boy a lawn mowing job in summer.
+\vspace*{.5in}
+
+\item Susan was extremely happy about the news.
+\vspace*{.5in}
+
+\item The woman with very long hair was blocking the view in the movie theater.
+\vspace*{.5in}
+
+
+\end{enumerate}
+
+
+\newpage
+%% ===============================================================
+% QUESTION #4: Parse Trees
+%% ================================================================
+
+\item (12 pts) Consider the following parse trees:
+
+ \begin{center}
+ \psfig{figure=parse-trees.eps,width=6in}
+ \end{center}
+
+ List all of the context-free grammar rules that are depicted in the parse
+ trees above.  You only need to list grammar rules for the
+ non-terminal symbols S, NP, VP, and PP. You do \underline{not} need
+ to list rules for the non-terminal symbols associated with part-of-speech tag
+ assignments (i.e., noun, verb, etc.).
+
+  Some grammar rules will appear multiple times in the parse trees
+  above, but please only list each   distinct rule ONCE.
+
+
+\newpage
+%% ================================================================
+% QUESTION #5: Subcategorization Frames
+%% ================================================================
+
+\item (15 pts)   Consider the following 3 subcategorization frames:
+\begin{center}
+{\it ``NP'', ``PP(to)'', ``that S''}
+\end{center}
+
+For each verb below, indicate which of the subcategorization frames
+can be exhibited by the verb. A verb may have multiple
+subcategorization frames.  If none of the subcategorization frames
+apply to a verb, then answer NONE.  Assume common meanings for the
+verbs (e.g., don't search for obscure or metaphorical meanings), and
+the verb should be used without a particle following it.
+
+For each  subcategorization frame that you list, give an example
+sentence containing the verb that matches the subcategorization
+frame.  (The verb can be used in any tense.)
+
+\begin{enumerate}
+
+\item {\it drive}
+
+\item {\it laugh}
+
+\item {\it wear}
+
+\item {\it hope}
+
+\item {\it point}
+
+
+\end{enumerate}
+
+
+\newpage
+\underline{\textbf{Question \#6 is for CS-6340 students ONLY!}}  \\
+
+\item (12 pts) Consider the following four context-free grammars to
+  recognize Noun Phrases (NPs):
+
+\begin{center}
+\begin{tabular}{|l|l|l|l|} \hline
+{\bf G1} & {\bf G2} & {\bf G3} & {\bf G4} \\ \hline
+NP \ra art NP1   & NP \ra art X    & NP \ra NP7         & NP \ra art W \\
+NP \ra NP1       & NP \ra adj X    & NP \ra art NP6     & NP \ra W \\
+NP1 \ra adj NP1  & NP \ra Y        & NP \ra adj NP6     & W \ra adj noun \\
+NP1 \ra NP2      & X \ra adj X     & NP \ra art adj NP6 & W \ra adj W \\
+NP2 \ra noun     & X \ra Y         & NP6 \ra NP7        & W \ra Z \\
+NP2 \ra noun NP2 & Y \ra noun      & NP7 \ra noun NP7   & Z \ra noun Z \\
+~                & Y \ra noun noun & NP7 \ra noun       & Z \ra noun \\
+~                & Y \ra noun Y    & ~                  & ~        \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace*{.2in}
+For each grammar, write a regular expression that accepts
+exactly the same NP language as the grammar. That is, the regular
+expression should recognize exactly the same set of part-of-speech tag
+sequences as the grammar.
+
+You can use the Kleene star (*) operator, which means 0 or more
+instances, as well as the + operator, which means 1 or more
+instances. For example, $verb^{*}$ means a sequence of $\geq$ 0 verbs,
+and $verb^{+}$ means a sequence of $\geq$ 1 verbs. You can also use
+$\epsilon$ to represent the empty string, if you wish. 
+
+\begin{enumerate}
+
+\item G1
+\vspace*{.2in}
+
+\item G2
+\vspace*{.2in}
+
+\item G3
+\vspace*{.2in}
+
+\item G4
+\vspace*{.2in}
+
+\end{enumerate}
+
+
+\end{enumerate}  % END OF WRITTEN QUESTIONS
+
+\newpage
+\hspace*{1.5in}  {\bf ELECTRONIC SUBMISSION INSTRUCTIONS} \\
+
+You should submit the answers to this assignment {\bf in pdf format}
+on our course's CANVAS site by 11:59pm on Tuesday, September 4.
+
+\end{document}
+
+
