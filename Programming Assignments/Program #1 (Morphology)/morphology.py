@@ -118,14 +118,15 @@ class Morphology:
                             result.add((topos, i[1], 'morphology'))
         return result
 
-    def output(self, word):
+    def output(self, rawword):
         """
         Method that takes a word and calls the morphology rule matching method,
         then returns the result of matching in a given format
         :param word: the word to be analyzed
         :return: a string contains definition(s) in a given format, each definition in a separate line
         """
-        result = self.match(word.lower())
+        word = rawword.lower()
+        result = self.match(word)
         out = ''
         if result:
             for e in result:
