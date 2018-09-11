@@ -1,22 +1,16 @@
 import sys
 
-
 class Morphology:
 
     def __init__(self):
-        args = sys.argv
-        if len(args) != 4:
-            raise ValueError('File arguments not equal to 3.')
-
+        self.args = sys.argv
         self.dict = {}
         self.rules = []
         self.test = []
 
-        self.read_dict(args[1])
-        self.read_rules(args[2])
-        self.read_test(args[3])
-
-    def read_dict(self, filepath):
+    def read_dict(self, filepath=None):
+        if filepath is None:
+            filepath = self.args[1]
         with open(filepath, 'r') as f:
             for i, line in enumerate(f):
                 record = line.split()
@@ -27,7 +21,9 @@ class Morphology:
                 else:
                     self.dict[record[0]] = [dictionary]
 
-    def read_rules(self, filepath):
+    def read_rules(self, filepath=None):
+        if filepath is None:
+            filepath = self.args[2]
         with open(filepath, 'r') as f:
             for i, line in enumerate(f):
                 record = line.split()
@@ -40,34 +36,22 @@ class Morphology:
                               'topos': record[4]}
                 self.rules.append(dictionary)
 
-    def read_test(self, filepath):
+    def read_test(self, filepath=None):
+        if filepath is None:
+            filepath = self.args[3]
         with open(filepath, 'r') as f:
             for i, line in enumerate(f):
                 record = line.split()
                 self.test.append(record[0])
 
-    # def find(self, word):
-    #     result = word
-    #     if word in self.dict:
-    #         info = self.dict[word]
-    #         result += ' ' + info['pos'] + ' ROOT=' + info['root'] + ' SOURCE=dictionary'
-    #     else:
-    #         info = self.match(word)
-    #         if info is None:
-    #             result += ' noun ROOT=' + word + ' SOURCE=default'
-    #         else:
-    #             result += ' ' + info['pos'] + ' ROOT=' + info['root'] + ' SOURCE=morphology'
-    #     print(result)
-    #     return result
-
     def match(self, word):
 
-        result = []
+        result = set()
 
         if word in self.dict:
             records = self.dict[word]
             for r in records:
-                result.append([r['pos'], r['root'], 'default'])
+                result.add((r['pos'], r['root'], 'dictionary'))
             return result
 
         for r in self.rules:
@@ -79,24 +63,35 @@ class Morphology:
             original = ''
             if loc == 'PREFIX' and word[0:len(add)] == add:
                 original = delete + word[len(add):]
-            elif loc == 'SUFFIX' and word[-len(add):] == add:
+                info = self.match(original)
+                if info:
+                    for i in info:
+                        if i[0] == frompos:
+                            result.add((topos, i[1], 'morphology'))
+            if loc == 'SUFFIX' and word[-len(add):] == add:
                 original = word[:-len(add)] + delete
-            else:
-                continue
-            info = self.match(original)
-            if info:
-                for i in info:
-                    if i[0] == frompos:
-                        result.append((topos, i[1], 'morphology'))
+                info = self.match(original)
+                if info:
+                    for i in info:
+                        if i[0] == frompos:
+                            result.add((topos, i[1], 'morphology'))
         return result
+
+    def output(self, word):
+        result = self.match(word.lower())
+        out = ''
+        if result:
+            for e in result:
+                out += word + ' ' + e[0] + ' ROOT=' + e[1] + ' SOURCE=' + e[2] + '\n'
+        else:
+            out += word + ' ' + 'noun' + ' ROOT=' + word + ' SOURCE=' + 'default' + '\n'
+        return out
 
 if __name__ == "__main__":
     morphology = Morphology()
-
-    # print(morphology.dict)
-    # print(morphology.test)
-    # print(morphology.suffix)
-    # print(morphology.prefix)
+    morphology.read_dict()
+    morphology.read_rules()
+    morphology.read_test()
 
     for t in morphology.test:
-        print(morphology.match(t))
+        print(morphology.output(t))
