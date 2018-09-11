@@ -1,0 +1,14 @@
+SUFFIX  ed     -    verb -> adjective .
+SUFFIX  ed     -    verb -> verb .
+SUFFIX  ed     e    verb -> adjective .
+SUFFIX  ed     e    verb -> verb .
+SUFFIX  ied    y    verb -> adjective .
+SUFFIX  ied    y    verb -> verb .
+PREFIX  pre    -    verb -> verb .
+SUFFIX  s      -    noun -> noun .
+SUFFIX  s      -    verb -> verb .
+SUFFIX  est    -    adjective -> adjective .
+SUFFIX  iest   y    adjective -> adjective .
+PREFIX  anti   -    noun -> adjective .
+SUFFIX  y      -    noun -> adjective .
+SUFFIX  er     -    verb -> noun .

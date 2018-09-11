@@ -1,0 +1,25 @@
+be verb
+are verb ROOT be 
+was verb ROOT be 
+were verb ROOT be 
+carry verb
+dress noun
+dress verb
+goose noun
+geese noun ROOT goose
+hair noun
+have verb
+has verb ROOT have 
+had verb ROOT have 
+is verb ROOT be 
+sleep verb
+sleep noun
+slept verb ROOT sleep 
+slow adjective
+sit verb
+sat verb ROOT sit 
+store noun
+store verb
+view verb
+view noun
+walk verb
