@@ -1,0 +1,530 @@
+%-*- Mode:LaTeX; -*-      
+\documentclass[11pt]{article}
+\usepackage{geometry}		% Force narrower margins
+\geometry{letterpaper}
+\geometry{lmargin=1.0in, tmargin=1.0in, rmargin=1.0in, bmargin=0.6in}
+\geometry{headsep=0in, footskip=0.4in}
+\usepackage{tikz-qtree}
+\usepackage{tikz-dependency}
+\setlength{\parskip}{.1in}  % removed space between paragraphs
+\setlength{\parindent}{0in}
+\usepackage{amsmath}
+\usepackage{tabu}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\newcommand{\np}{\textbf{NP}}
+\newcommand{\pp}{\textbf{PP}}
+\newcommand{\bb}{\textbf{/B }}
+\newcommand{\oo}{\textbf{/O }}
+\newcommand{\ii}{\textbf{/I }}
+\newcommand{\ra}{$\rightarrow$~}
+\newcommand{\dt}{$\circ$~}
+
+\begin{document}
+
+\large
+\begin{center}
+{\bf CS-5340/6340, Written Assignment \#2} \\
+{\bf DUE: Thursday September 20, 2018 by 11:59pm}
+\end{center}
+\normalsize
+
+\begin{enumerate}  
+
+
+
+\item (24 pts)
+\begin{enumerate} 
+
+\item Suppose a shallow parser (chunker) is applied to the sentences
+  below. Label all prepositional phrase (PP) chunks and base noun
+  phrase (NP) chunks that should be produced for each sentence. Be sure
+  to label an NP even if it is nested in a PP. For examples {\it `He stays
+  in Salt Lake City'} should be `[NP: He] stays [PP: in [NP: Salt Lake
+  City]]'. \\
+
+\begin{enumerate}
+
+\item~[\np: John] gave [\np: Mary] [\np: a book] as [\np: a gift].
+\vspace*{.3in}
+
+\item~[\np: A person] [\pp: in [\np: the park] threw [\np: a bone] [\pp: to [\np: his dog]].
+\vspace*{.3in}
+
+\item~[\pp: In [\np: July]] [\np: Bob] will sell [\np: his food truck].
+\vspace*{.3in} 
+
+\item~[\np: The mouse] [\np: the cat] caught died.
+\vspace*{.3in}
+
+\item~[\np: The storm] destroyed [\np: a large number] [\pp: of [\np:properties]] [\pp: in [\np: the city]]. 
+\vspace*{.3in}
+
+
+\end{enumerate}
+\item Label each sentence below with BIO tags corresponding to the NP
+  chunks that you identified in part (a). \\
+
+
+\begin{enumerate}
+
+\item John\bb gave\oo Mary\bb a\bb book\ii as\oo a\bb gift\ii.  	
+ 
+\vspace*{.3in}
+
+
+\item A\bb person\ii in\oo the\bb park\ii threw\oo a\bb bone\ii to\oo his\bb dog\ii.
+
+\vspace*{.3in}
+
+
+\item In\oo July\bb Bob\bb will\oo sell\oo his\bb food\ii truck\ii.
+
+\vspace*{.3in} 
+
+\item The\bb mouse\ii the\bb cat\ii caught\oo died\oo.
+
+\vspace*{.3in}
+
+\item The\bb storm\ii destroyed\oo a\bb large\ii number\ii of\oo properties\bb in\oo the\bb city\ii.
+ 
+\vspace*{.3in}
+
+
+\end{enumerate}
+
+\end{enumerate}
+
+
+\newpage
+\item (24 pts) In this question, you are going to use the CKY
+  algorithm to parse a sentence. (Use the ordinary CKY algorithm, \underline{not}
+ probabilistic CKY.)
+\begin{enumerate}
+
+
+\item List all table entries  produced by the CKY algorithm for
+  the sentence {\it `John eats the steak with chopsticks'} using the grammar
+  below. Each entry table[i,j] refers to the cell  for row i and
+  column j in the table. For example, table[1,4] should contain constituents that span words 1
+  through 4.\\
+
+\fbox{\parbox{0.4\textwidth}{
+S \ra NP VP\\
+NP \ra NP PP \\
+NP \ra art noun \\
+PP \ra prep NP \\
+VP \ra VP PP  \\
+VP \ra verb NP\\
+\\
+NP \ra John \\
+NP \ra chopsticks \\
+NP \ra steak \\
+noun \ra John \\
+noun \ra chopsticks \\
+noun \ra steak \\
+verb \ra eats \\
+prep \ra with \\
+art \ra the
+
+
+}
+}
+\\\\\\
+
+\textbf{table[1,1]}: \{noun, NP\}\\
+\textbf{table[1,2]}: \{\}\\
+\textbf{table[1,3]}: \{\}\\
+\textbf{table[1,4]}: \{S\}\\
+\textbf{table[1,5]}: \{\}\\
+\textbf{table[1,6]}: \{S, S\}\\
+\textbf{table[2,2]}: \{verb\}\\
+\textbf{table[2,3]}: \{\}\\
+\textbf{table[2,4]}: \{VP\}\\
+\textbf{table[2,5]}: \{\}\\
+\textbf{table[2,6]}: \{VP, VP\}\\
+\textbf{table[3,3]}: \{art\}\\
+\textbf{table[3,4]}: \{NP\}\\
+\textbf{table[3,5]}: \{\}\\
+\textbf{table[3,6]}: \{NP\}\\
+\textbf{table[4,4]}: \{noun, NP\}\\
+\textbf{table[4,5]}: \{\}\\
+\textbf{table[4,6]}: \{NP\}\\
+\textbf{table[5,5]}: \{prep\}\\
+\textbf{table[5,6]}: \{PP\}\\
+\textbf{table[6,6]}: \{noun, NP\}\\
+
+
+\newpage
+
+\item Draw the parse tree for every S constituent produced in the
+  table for part (a). For each one, please indicate which cell the S constituent appears in.
+  
+\begin{figure}[h]
+\begin{minipage}[b]{1.0\linewidth}
+\centering
+\begin{tikzpicture}[scale=.85, sibling distance=0pt]
+
+\Tree [.S  
+			[.NP \textbf{John} ] 
+			[.VP 
+				[.verb \textbf{eats} ]
+				[.NP
+					[.art \textbf{the} ]
+					[.noun \textbf{steak} ] 
+                  ] 
+              ] 
+          ]
+\end{tikzpicture}
+\caption{table[1,4]}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[h]
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\begin{tikzpicture}[scale=.85, sibling distance=0pt]
+
+\Tree [.S  
+			[.NP \textbf{John} ] 
+			[.VP 
+				[.verb \textbf{eats} ]
+				[.NP
+					[.NP
+						[.art \textbf{the} ]
+						[.noun \textbf{steak} ]
+					]
+					[.PP
+						[.prep \textbf{with} ]
+						[.NP \textbf{chopsticks} ]
+					]
+                  ]
+              ]
+          ]
+\end{tikzpicture}
+\caption{table[1,6]}
+\end{minipage}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\begin{tikzpicture}[scale=.85, sibling distance=0pt]
+
+\Tree [.S  
+			[.NP \textbf{John} ] 
+			[.VP 
+				[.VP
+					[.verb \textbf{eats} ]
+					[.NP
+						[.art \textbf{the} ]
+						[.noun \textbf{steak} ]
+					]
+				]
+				[.PP
+					[.prep \textbf{with} ]
+					[.NP \textbf{chopsticks} ]
+				]
+              ]
+          ]
+\end{tikzpicture}
+\caption{table[1,6]}
+\end{minipage}
+\end{figure}
+
+\vspace{3in}
+
+
+\end{enumerate}
+
+
+\newpage
+
+\item (18 Pts) Given the grammar G2 and the sentence {\it `the dog park is
+  closed'}, fill in a chart using the Earley chart parsing
+  algorithm. Each chart entry should be a constituent or a rule, with
+  a start and end position indicating the range of words that have
+  been matched by the constituent or rule. For example, `NP[1-4]'
+  should be used for an NP that matches words in positions 1-3 (thus ends at
+  position 4). Similarly, `S \ra NP * VP
+  [1,3]' means that the NP has matched the words in positions
+  1-2 and the rule is  anticipating a VP starting in position
+  3. Assume that the first word in the   sentence is in position 1.
+
+\begin{center}
+\begin{tabular}{|l|} \hline 
+\textbf{G2}  \\  
+S \ra NP VP    \\
+S \ra VP NP     \\
+VP \ra verb VP     \\
+VP \ra verb \\
+NP \ra art NP    \\
+NP \ra noun noun \\  \\
+noun \ra dog $\mid$ park \\
+verb \ra closed $\mid$ park $\mid$ is \\
+art \ra the \\
+\hline
+\end{tabular}\end{center}
+
+Below, we have created the part-of-speech constituents that belong in the chart to get you
+started. Please fill in the remaining entries!
+
+\begin{center}
+ \begin{tabular}{lc} {\bf Constituent or Rule~~~} & {\bf ~~~Start-End} \\ \hline 
+ art(``the'') &  [1-2] \\
+ noun(``dog'') & [2-3] \\
+ noun(``park'') & [3-4] \\
+ verb(``park'') & [3-4]  \\
+ verb(``is'') & [4-5] \\
+ verb(``closed'') & [5-6] \\\hline\\
+ S \ra * NP VP & [1-1] \\
+ NP \ra * art NP & [1-1] \\
+ NP \ra * noun noun & [1-1] \\
+ S \ra * VP NP & [1-1] \\
+ VP \ra * verb VP & [1-1] \\
+ VP \ra * verb & [1-1] \\
+ %art(``the'') &  [1-2] \\
+ NP \ra art * NP & [1-2] \\
+ NP \ra * art NP & [2-2] \\
+ NP \ra * noun noun & [2-2] \\
+ %noun(``dog'') & [2-3] \\
+ NP \ra noun * noun & [2-3] \\
+ %noun(``park'') & [3-4] \\
+ NP \ra noun noun * & [2-4] \\
+ NP & [2-4] \\
+ NP \ra art NP * & [1-4] \\
+ NP & [1-4] \\
+ S \ra NP * VP & [1-4] \\
+ VP \ra * verb VP & [4-4] \\
+ VP \ra * verb & [4-4] \\
+ %verb(``is'') & [4-5] \\
+ VP \ra verb * VP & [4-5] \\
+ VP \ra * verb VP & [5-5] \\
+ VP \ra * verb & [5-5] \\
+ VP \ra verb * & [4-5] \\
+ VP & [4-5] \\
+ S \ra NP VP * & [1-5] \\
+ S & [1-5] \\
+ %verb(``closed'') & [5-6] \\
+ VP \ra verb * VP & [5-6] \\
+ VP \ra * verb VP & [6-6] \\
+ VP \ra * verb & [6-6] \\
+ VP \ra verb * & [5-6] \\
+ VP & [5-6] \\
+ VP \ra verb VP * & [4-6] \\
+ VP & [4-6] \\
+ S \ra NP VP * & [1-6] \\
+ S & [1-6] \\
+ 
+\end{tabular}\end{center}
+
+
+
+\newpage
+\item (14 pts) Consider the four parse trees below:
+
+\begin{figure}[h]
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\begin{tikzpicture}[scale=.85, sibling distance=0pt]
+
+\Tree [.S  [.NP adj noun ] 
+           [.VP verb [.PP prep 
+                              [.NP noun noun ] 
+                     ] 
+           ] 
+      ]
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\begin{tikzpicture}[scale=.85, sibling distance=0pt]
+
+\Tree [.S  [ .VP verb [.NP [adj noun ] ][ [.PP [prep [.NP art [.NP adj noun ] ] ] ]] ] 
+                  ]
+\end{tikzpicture}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[h]	
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\begin{tikzpicture}[scale=.85, sibling distance=0pt]    
+
+\Tree [.S [.NP noun ] 
+		  [.VP  verb 
+			[.VP1 inf verb 
+				[.NP art [.NP adj noun ] 
+				] 
+			]		  
+		  ]          
+      ]
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\begin{tikzpicture}[scale=.85, sibling distance=0pt]   
+
+\Tree [.S [.NP noun noun ] 
+  		  [.VP verb 
+  		  	   [.VP2 adv [.VP1 inf verb 
+  		  	                 [.NP art 
+  		  	                           [.NP adj noun ]
+  		  	                  ] 
+  		                ] 
+  	            ]
+  	       ]
+  	  ]
+\end{tikzpicture}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[h]
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+
+\end{minipage}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+
+\end{minipage}
+\end{figure}
+
+\begin{figure}[h]	
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+
+\end{minipage}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+
+\end{minipage}
+\end{figure}
+
+Consider these four parse trees to be a (tiny!) Treebank, and construct a
+probabilistic context-free grammar (PCFG) from this Treebank. 
+List all distinct context-free grammar rules that are depicted in the
+trees above and compute their probabilities.
+
+\begin{center}
+	\begin{tabular}{l@{\hskip 1in}c} 
+	 \textbf{Rules~~~~~~~~~~~~~~~} & \textbf{Probability} \\ \hline 
+	 S \ra NP VP & .75 \\
+	 S \ra VP & .25 \\
+	 NP \ra adj noun & .46 \\
+	 NP \ra noun noun & .18 \\
+	 NP \ra art NP & .27 \\
+	 NP \ra noun & .09 \\
+	 VP \ra verb PP & .25 \\
+	 VP \ra verb NP PP & .25 \\
+	 VP \ra verb VP1 & .25 \\
+	 VP \ra verb VP2 & .25 \\
+	 VP1 \ra inf verb NP & 1 \\
+	 VP2 \ra adv VP1 & 1 \\
+	 PP \ra prep NP & 1
+ \end{tabular}
+\end{center}
+
+
+
+\newpage
+\item (20 pts) For each sentence below, draw the dependency relations
+  that would be produced by applying the given sequence of
+  shift-reduce operations. w$_{i}$ means the i$^{th}$ word in the
+  sentence. (The dependency relations will be {\it unlabeled} directed
+  edges.)
+  \\
+	%to draw a tree in latex, refer to the lines for trees in part b) below
+	
+	\begin{enumerate}
+		\item
+		SENTENCE: w$_{1}$ w$_{2}$ w$_{3}$ w$_{4}$ w$_{5}$ w$_{6}$ \\\\
+		OPERATIONS: Shift, Shift, LeftArc, Shift, Shift, RightArc, RightArc, Shift, Shift, LeftArc, RightArc \\
+		
+	\begin{dependency}[edge slant=15pt,label theme = simple, edge theme = iron]
+  	\begin{deptext}[column sep=2em]
+    		w$_{1}$ \& w$_{2}$ \& w$_{3}$ \& w$_{4}$ \& w$_{5}$ \& w$_{6}$ \\ \\ \\
+  	\end{deptext}
+  	\depedge{2}{1}{}
+  	\depedge{2}{6}{}
+  	\depedge{2}{3}{}
+  	\depedge{3}{4}{}
+  	\depedge{6}{5}{}
+	\end{dependency}
+
+		\vspace{.5in}
+	
+		\item
+		SENTENCE: w$_{1}$ w$_{2}$ w$_{3}$ w$_{4}$ w$_{5}$ w$_{6}$ w$_{7}$ \\
+		
+		OPERATIONS: Shift, Shift, LeftArc, Shift, Shift, LeftArc, Shift, Shift, Shift, LeftArc, LeftArc, RightArc, RightArc\\
+
+	\begin{dependency}[edge slant=15pt,label theme = simple, edge theme = iron]
+  	\begin{deptext}[column sep=2em]
+    		w$_{1}$ \& w$_{2}$ \& w$_{3}$ \& w$_{4}$ \& w$_{5}$ \& w$_{6}$ \& w$_{7}$\\ \\ \\
+  	\end{deptext}
+  	\depedge{2}{1}{}
+  	\depedge{2}{4}{}
+  	\depedge{4}{3}{}
+  	\depedge{4}{7}{}
+  	\depedge{7}{5}{}
+  	\depedge{7}{6}{}
+	\end{dependency}
+	
+		\vspace{.5in}
+	\end{enumerate}
+
+\newpage
+
+\underline{\textbf{Question \#6 is for CS-6340 students ONLY!}}  \\
+
+\item	(13 pts) For each dependency graph below, 
+        determine the sequence of shift-reduce operations that should be
+        predicted by the oracle in order to produce the graph.\\ 
+
+	% lines for dependency tree 
+	\vspace{0.5in}
+	\begin{dependency}[edge slant=15pt,label theme = simple, edge theme = iron]
+  		\begin{deptext}[column sep=1em]
+    			The \& apple \&  eaten \& by \& John \& was \& rotten\\ \\ \\
+  		\end{deptext}
+  		\depedge{2}{1}{}
+  		\depedge{2}{3}{}  
+  		\depedge{7}{2}{}
+  		\depedge{7}{6}{}
+  		\depedge{3}{5}{}
+  		\depedge{5}{4}{}
+
+		\end{dependency}
+		
+	OPERATIONS: Shift, Shift, LeftArc, Shift, Shift, Shift, LeftAre, RightArc, RightArc, Shift, Shift, LeftArc, LeftArc
+
+	\vspace{.5in}
+
+
+	\begin{dependency}[edge slant=15pt,label theme = simple, edge theme = iron]
+  	\begin{deptext}[column sep=1em]
+    		This \& year \& they \& are \& moving \& even \& faster \\ \\ \\
+  	\end{deptext}
+  	\depedge{2}{1}{}
+  	\depedge{5}{3}{}
+  	\depedge{5}{4}{}
+  	\depedge{5}{2}{}
+  	\depedge{5}{7}{}
+  	\depedge{7}{6}{}
+	\end{dependency}
+	
+	OPERATIONS: Shift, Shift, LeftArc, Shift, Shift, Shift, LeftArc, LeftArc, LeftArc, Shift, Shift, LeftArc, RightArc
+	
+	\vspace{1in}
+	
+
+\end{enumerate}  % END OF WRITTEN QUESTIONS
+
+
+\newpage
+\hspace*{1.5in}  {\bf ELECTRONIC SUBMISSION INSTRUCTIONS} \\
+
+You should submit the answers to this assignment {\bf in pdf format}
+on our course's CANVAS site by 11:59pm on Thursday, September 20.
+
+\end{document}
+
+
