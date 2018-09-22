@@ -1,0 +1,9 @@
+S -> NP VP .80
+S -> VP NP .20
+NP -> I .37
+NP -> fish .128
+NP -> trust .172
+NP -> shrinks .33
+VP -> fish .4
+VP -> shrinks .3025
+VP -> trust .2975
