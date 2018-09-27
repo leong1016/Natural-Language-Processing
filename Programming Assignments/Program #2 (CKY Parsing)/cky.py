@@ -80,11 +80,20 @@ class CKY:
                     table[col][col].append(rule['left'])
             for row in range(col-1, -1, -1):
                 for k in range(0, col):
-                    right0 = table[0][k]
+                    right0 = table[row][k]
                     right1 = table[k+1][col]
                     for rule in self.rules:
-                        if len(rule['right']) == 2 and rule['right'][0] in right0 and rule['right'][1] in right1:
-                            table[row][col].append(rule['left'])
+                        left = rule['left']
+                        right = rule['right']
+                        if len(right) != 2:
+                            continue
+                        for r0 in right0:
+                            if right[0] != r0:
+                                continue
+                            for r1 in right1:
+                                if right[1] != r1:
+                                    continue
+                                table[row][col].append(left)
         return table
 
     def cky_prob(self, sentence):
@@ -105,9 +114,11 @@ class CKY:
                 bestProb = 0
                 bestLeft = ''
                 for k in range(0, col):
-                    right0 = table[0][k]
+                    right0 = table[row][k]
                     right1 = table[k+1][col]
                     for rule in self.rules:
+                        if len(rule['right']) != 2:
+                            continue
                         for e in right0:
                             if rule['right'][0] != e['constituent']:
                                 continue
