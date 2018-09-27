@@ -1,0 +1,15 @@
+S -> NP VP 1
+NP -> NP PP .2
+NP -> art noun .5
+PP -> prep NP 1
+VP -> VP PP .5
+VP -> verb NP .5
+NP -> John .05
+NP -> chopsticks .1
+NP -> steak .15
+noun -> John .17
+noun -> chopsticks .33
+noun -> steak 0.5
+verb -> eats 1
+prep -> with 1
+art -> the 1

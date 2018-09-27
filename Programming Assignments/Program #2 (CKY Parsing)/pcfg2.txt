@@ -1,0 +1,11 @@
+S -> NP VP .80
+NP -> DET N .30
+NOM -> DET N .25
+VP -> V NP .20
+VP -> V NOM .10
+V -> includes .05
+DET -> the .40
+DET -> a .40
+V -> stop .05
+N -> stop .01
+N -> flight .02
