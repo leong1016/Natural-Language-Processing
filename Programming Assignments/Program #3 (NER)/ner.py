@@ -28,6 +28,8 @@ class NER:
         self.args = sys.argv
         self.seed = None
         self.training_data = None
+        self.training_data1 = None
+        self.training_data2 = None
         self.testing_data = None
         self.dlist_spelling = {}
         self.dlist_context = {}
@@ -93,43 +95,18 @@ class NER:
         A wrapper method for running the algorithm on training data
         :param n_iteration: number of iterations of running Collins & Singer algorithm
         """
-        seed = self.seed
-        instance = self.training_data
-
         print('SEED DECISION LIST\n')
-        self.print_dict(seed, 'SPELLING')
+        self.print_dict(self.seed, 'SPELLING')
+        self.dlist_spelling.update(self.seed)
+
         for i in range(n_iteration):
-            seed, instance = self.collins_singer(i, seed, instance)
+            self.collins_singer(i)
 
         print('\nFINAL DECISION LIST\n')
         self.print_dict(self.dlist_spelling, 'SPELLING')
         self.print_dict(self.dlist_context, 'CONTEXT')
 
-    def apply(self):
-        """
-        A wrapper method for applying learned rules on testing data
-        """
-        for i in self.testing_data:
-            # spelling
-            if i['CLASS'] is not None:
-                continue
-            np = i['NP']
-            for k, v in self.dlist_spelling.items():
-                if k in np:
-                    i['CLASS'] = v['CLASS']
-                    break
-            # context
-            if i['CLASS'] is not None:
-                continue
-            context = i['CONTEXT']
-            for k, v in self.dlist_context.items():
-                if k in context:
-                    i['CLASS'] = v['CLASS']
-                    break
-        print('\nAPPLYING FINAL DECISION LIST TO TEST INSTANCES\n')
-        self.print_instance(self.testing_data)
-
-    def collins_singer(self, i, seed, instance, n_best=2, min_prob=0.8, min_freq=5):
+    def collins_singer(self, i, n_best=2, min_prob=0.8, min_freq=5):
         """
         The core method for Collins & Singer algorithm
         :param i: the number of current iteration
@@ -140,21 +117,27 @@ class NER:
         :param min_freq: the threshold for frequency
         :return: learned spelling rules and examples after applying the learned rules (only for next iteration)
         """
-        instance1 = self.apply_spelling(seed, instance)
-        stats_context = self.induce_context(instance1)
+        instance = self.training_data.copy()
+        self.clear_labels(instance)
+        instance = self.apply_spelling(self.dlist_spelling, instance)
+        stats_context = self.induce_context(instance)
         best_context = self.get_best(stats_context, n_best, min_prob, min_freq)
         print('\nITERATION #{}: NEW CONTEXT RULES\n'.format(i+1))
         self.print_dict(best_context, 'CONTEXT')
         self.dlist_context.update(best_context)
 
-        instance2 = self.apply_context(best_context, instance1)
-        stats_spelling = self.induce_spelling(instance2)
+        instance = self.training_data.copy()
+        self.clear_labels(instance)
+        instance = self.apply_context(self.dlist_context, instance)
+        stats_spelling = self.induce_spelling(instance)
         best_spelling = self.get_best(stats_spelling, n_best, min_prob, min_freq)
         print('\nITERATION #{}: NEW SPELLING RULES\n'.format(i+1))
         self.print_dict(best_spelling, 'SPELLING')
         self.dlist_spelling.update(best_spelling)
 
-        return best_spelling, instance2
+    def clear_labels(self, instance):
+        for i in instance:
+            i['CLASS'] = None
 
     def apply_spelling(self, rules, instance):
         for i in instance:
@@ -244,6 +227,30 @@ class NER:
         result = result.sort_index().sort_values(by=['PROB', 'FREQ'], ascending=False)
         return result
 
+    def apply(self):
+        """
+        A wrapper method for applying learned rules on testing data
+        """
+        for i in self.testing_data:
+            # spelling
+            if i['CLASS'] is not None:
+                continue
+            np = i['NP']
+            for k, v in self.dlist_spelling.items():
+                if k in np:
+                    i['CLASS'] = v['CLASS']
+                    break
+            # context
+            if i['CLASS'] is not None:
+                continue
+            context = i['CONTEXT']
+            for k, v in self.dlist_context.items():
+                if k in context:
+                    i['CLASS'] = v['CLASS']
+                    break
+        print('\nAPPLYING FINAL DECISION LIST TO TEST INSTANCES\n')
+        self.print_instance(self.testing_data)
+
     @staticmethod
     def modify(df, aclass):
         df['FREQ'] = df.iloc[:,0:3].max(axis=1)
@@ -254,7 +261,7 @@ class NER:
     @staticmethod
     def print_dict(d, type):
         for k, v in d.items():
-            print('{0:s} Contains({1:s}) -> {2:s} (prob={3:.3f} ; freq={4:d})'.format(type, k, v['CLASS'], v['PROB'], v['FREQ']))
+            print('{0:s} Contains({1:s}) -> {2:s} (prob={3:.3f} ; freq={4:.0f})'.format(type, k, v['CLASS'], v['PROB'], v['FREQ']))
 
     @staticmethod
     def print_instance(d):
